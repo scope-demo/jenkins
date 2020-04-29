@@ -1,0 +1,25 @@
+name: Tests jenkins-core with Scope
+on:
+  push:
+    branches:
+      - install_scope
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Tests jenkins-core with Scope
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Run Jenkins Core tests with Scope
+        run: mvn -Pdebug -Plight-test -Pscope clean verify
+        env:
+          SCOPE_DSN: ${{ secrets.SCOPE_DSN }}
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: scopelogs
+          path: /home/runner/work/jenkins/jenkins/logs

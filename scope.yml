@@ -1,0 +1,9 @@
+logger:
+  level: "debug"
+  root: "/home/runner/work/jenkins/jenkins/logs"
+code_path:
+  enabled: true
+  base_packages: "hudson, jenkins"
+runner:
+  enabled: true
+  send_spans: true

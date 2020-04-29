@@ -43,6 +43,8 @@ THE SOFTWARE.
     <spring.version>2.5.6.SEC03</spring.version>
     <groovy.version>2.4.12</groovy.version>
     <hamcrest.version>2.2</hamcrest.version>
+    <scope.agent.version>0.11.0-beta.1</scope.agent.version>
+    <scopeSurefireArgs />
   </properties>
 
   <dependencyManagement>
@@ -661,6 +663,12 @@ THE SOFTWARE.
       <version>2.2.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.undefinedlabs.scope</groupId>
+      <artifactId>scope-agent</artifactId>
+      <version>${scope.agent.version}</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -816,7 +824,7 @@ THE SOFTWARE.
         <configuration>
           <forkCount>0.5C</forkCount>
           <reuseForks>true</reuseForks>
-          <argLine>-noverify</argLine> <!-- some versions of JDK7/8 causes VerifyError during mock tests: http://code.google.com/p/powermock/issues/detail?id=504 -->
+          <argLine>-noverify ${scopeSurefireArgs}</argLine> <!-- some versions of JDK7/8 causes VerifyError during mock tests: http://code.google.com/p/powermock/issues/detail?id=504 -->
         </configuration>
       </plugin>
       <plugin><!-- set main class -->
@@ -863,6 +871,12 @@ THE SOFTWARE.
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
+    </profile>
+    <profile>
+      <id>scope</id>
+      <properties>
+        <scopeSurefireArgs>-javaagent:${settings.localRepository}/com/undefinedlabs/scope/scope-agent/${scope.agent.version}/scope-agent-${scope.agent.version}.jar</scopeSurefireArgs>
+      </properties>
     </profile>
     <profile>
       <id>release</id>
