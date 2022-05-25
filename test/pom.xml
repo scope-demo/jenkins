@@ -68,7 +68,7 @@ THE SOFTWARE.
         <!-- requireUpperBoundDeps via matrix-project and junit -->
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>script-security</artifactId>
-        <version>1145.vb_cf6cf6ed960</version>
+        <version>1175.v4b_d517d6db_f0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
